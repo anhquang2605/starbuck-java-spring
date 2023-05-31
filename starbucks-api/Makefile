@@ -27,7 +27,7 @@ run-test: build
 
 
 mysql:
-	docker run -d --network starbucks --name mysql -td -p 3306:3306 -e MYSQL_ROOT_PASSWORD=cmpe172 mysql:8.0
+	docker run -d --network starbucks --name mysql -td -p 3306:3306 -e MYSQL_ROOT_PASSWORD=cool mysql:8.0
 
 mysql-shell:
 	docker exec -it mysql bash 
@@ -55,10 +55,8 @@ docker-shell:
 
 docker-push:
 	docker login
-	docker build -t $(account)/spring-starbucks-api:latest .
-	docker push $(account)/spring-starbucks-api:latest
-	docker build -t $(account)/spring-starbucks-api:v3.1 .
-	docker push $(account)/spring-starbucks-api:v3.1
+	docker build -t $(account)/spring-starbucks-api .
+	docker push $(account)/spring-starbucks-api
 
 # Compose
 

@@ -2,8 +2,12 @@ package com.example.springstarbucksapi.service;
 
 import com.example.springstarbucksapi.model.StarbucksCard;
 import com.example.springstarbucksapi.model.StarbucksOrder;
+import com.example.springstarbucksapi.model.ActiveOrder;
+import com.example.springstarbucksapi.model.Drink;
 import com.example.springstarbucksapi.repository.StarbucksCardRepository;
 import com.example.springstarbucksapi.repository.StarbucksOrderRepository;
+import com.example.springstarbucksapi.repository.ActiveOrderRepository;
+import com.example.springstarbucksapi.repository.DrinkRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +25,10 @@ public class StarbucksService {
     // REF: https://www.moreofless.co.uk/spring-mvc-java-autowired-component-null-repository-service
     @Autowired private StarbucksOrderRepository ordersRepository;
     @Autowired private StarbucksCardRepository cardsRepository;
+
+    @Autowired private ActiveOrderRepository activeRepository;
+
+    @Autowired private DrinkRepository drinkRepository;
 
     /* https://docs.spring.io/spring-data/jpa/docs/2.4.5/api/ */
 
@@ -75,6 +83,8 @@ public class StarbucksService {
     /* Delete All Starbucks Orders (Cleanup for Unit Testing) */
     public void deleteAllOrders() {
         ordersRepository.deleteAllInBatch();
+        activeRepository.deleteAllInBatch();
+        drinkRepository.deleteAllInBatch();
         orders.clear();
     }
 
@@ -86,7 +96,7 @@ public class StarbucksService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Order Request!");
         }
         // check for active order
-        StarbucksOrder active = orders.get(regid);
+        ActiveOrder active = activeRepository.findByRegister(regid);
         if (active != null) {
             System.out.println("Active Order (Reg ID = " + regid + ") => " + active);
             if (active.getStatus().equals("Ready for Payment."))
@@ -183,18 +193,29 @@ public class StarbucksService {
         order.setRegister(regid);
         order.setStatus("Ready for Payment.");
         StarbucksOrder new_order = ordersRepository.save(order);
-        orders.put(regid, new_order);
+        ActiveOrder a_order = new ActiveOrder();
+        a_order.setId(new_order.getId());
+        a_order.setDrink(new_order.getDrink());
+        a_order.setMilk(new_order.getMilk());
+        a_order.setSize(new_order.getSize());
+        a_order.setTotal(new_order.getTotal());
+        a_order.setStatus(new_order.getStatus());
+        a_order.setCard(new_order.getCard());
+        a_order.setRegister(new_order.getRegister());
+        activeRepository.save(a_order);
         return new_order;
     }
 
     /* Get Details of a Starbucks Order */
-    public StarbucksOrder getActiveOrder(String regid) {
-        return orders.get(regid);
+    @Transactional
+    public ActiveOrder getActiveOrder(String regid) {
+        return activeRepository.findByRegister(regid);
     }
 
     /* Clear Active Order */
+    @Transactional
     public void clearActiveOrder(String regid) {
-        orders.remove(regid);
+        activeRepository.deleteByRegister(regid);
     }
 
     /*  Process payment for the "active" Order.
@@ -203,7 +224,7 @@ public class StarbucksService {
     @Transactional
     public StarbucksCard processOrder(String regid, String cardnum) throws ResponseStatusException {
         System.out.println("Pay for Order: Reg ID = " + regid + " Using Card = " + cardnum);
-        StarbucksOrder active = orders.get(regid);
+        ActiveOrder active = activeRepository.findByRegister(regid);
         if (active == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order Not Found!");
         }
@@ -231,7 +252,16 @@ public class StarbucksService {
         active.setStatus(status);
         cardsRepository.save(card);
         active.setCard(card);
-        ordersRepository.save(active);
+        StarbucksOrder order = new StarbucksOrder();
+        order.setId(active.getId());
+        order.setDrink(active.getDrink());
+        order.setMilk(active.getMilk());
+        order.setSize(active.getSize());
+        order.setTotal(active.getTotal());
+        order.setStatus(active.getStatus());
+        order.setCard(active.getCard());
+        order.setRegister(active.getRegister());
+        ordersRepository.save( order);
         return card;
     }
 

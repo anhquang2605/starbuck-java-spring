@@ -9,11 +9,9 @@ services:
     networks:
       - network   
     ports:
-      - 3306    
-    networks:
-      - network
+      - 3306
     environment:
-      MYSQL_ROOT_PASSWORD: "cmpe172"
+      MYSQL_ROOT_PASSWORD: "cool"
     restart: always     
   starbucks:
     image: spring-starbucks-api

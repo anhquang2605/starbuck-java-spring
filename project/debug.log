@@ -1,0 +1,220 @@
+{"balance":20,"cardCode":"844","cardNumber":"890382478","activated":false,"status":"New Card"}
+New Card: 890382478[844] Balance: 20.0
+Status: 200 
+{"balance":20,"cardCode":"844","cardNumber":"890382478","activated":true,"status":"New Card"}
+============================================
+--------- D E V I C E  S T A T E  ----------
+============================================
+Pin Option    = 4
+Stored Pin    = 1234
+Authenticated = false
+Orientation   = PORTRAIT
+API URL       = http://34.133.206.243/api
+API KEY       = Zkfokey2311
+API Register  = 5012349
+============================================
+Screen: starbucks.Passcode
+Screen: starbucks.Spacer
+Screen: starbucks.KeyPad
+Screen: starbucks.Passcode
+Screen: starbucks.Spacer
+Screen: starbucks.KeyPad
+Value: [Ljava.lang.String;@4803b726
+KeyPad Touched at (1, 5)
+Key: 1
+Key: 1 Count: 1
+Current State: starbucks.OnePinDigit
+D1 = 1
+D2 = 
+D3 = 
+D4 = 
+Screen: starbucks.Passcode
+Screen: starbucks.Spacer
+Screen: starbucks.KeyPad
+Value: [Ljava.lang.String;@ffaa6af
+KeyPad Touched at (2, 5)
+Key: 2
+Key: 2 Count: 2
+Current State: starbucks.TwoPinDigits
+D1 = 1
+D2 = 2
+D3 = 
+D4 = 
+Screen: starbucks.Passcode
+Screen: starbucks.Spacer
+Screen: starbucks.KeyPad
+Value: [Ljava.lang.String;@53ce1329
+KeyPad Touched at (3, 5)
+Key: 3
+Key: 3 Count: 3
+Current State: starbucks.ThreePinDigits
+D1 = 1
+D2 = 2
+D3 = 3
+D4 = 
+Screen: starbucks.Passcode
+Screen: starbucks.Spacer
+Screen: starbucks.KeyPad
+Value: [Ljava.lang.String;@316bcf94
+KeyPad Touched at (1, 6)
+Key: 4
+Key: 4 Count: 4
+Current State: starbucks.FourPinDigits
+D1 = 1
+D2 = 2
+D3 = 3
+D4 = 4
+Authenticating...
+Successful Login!
+l: 10
+w: 15
+h: 15
+DEBUG: $20.00
+
+cnt1: 1
+pad1: 4
+....
+DEBUG: [Ljava.lang.String;@576d5deb 1
+line (before): $20.00 [len = 6]
+line (after):      $20.00 [pad = 5]
+cnt2: 5
+pad2: 5
+.....
+
+
+0: ===============
+1:    MyCards
+2: ===============
+3: 
+4: 
+5: 
+6: 
+7:      $20.00
+8: 
+9: 
+10: 
+11: 
+12: 
+13: 
+14: ===============
+15: [A][B][C][D][E]
+Value: [Ljava.lang.String;@2e3967ea
+l: 10
+w: 15
+h: 15
+DEBUG: [890382478]
+
+
+Scan Now
+
+cnt1: 4
+pad1: 3
+...
+DEBUG: [Ljava.lang.String;@6221a451 4
+line (before): [890382478] [len = 11]
+line (after):   [890382478] [pad = 2]
+line (before):  [len = 0]
+line (after):          [pad = 8]
+line (before):  [len = 0]
+line (after):          [pad = 8]
+line (before): Scan Now [len = 8]
+line (after):     Scan Now [pad = 4]
+cnt2: 7
+pad2: 3
+...
+
+
+0: ===============
+1:   MyCardsPay
+2: ===============
+3: 
+4: 
+5: 
+6:   [890382478]
+7:         
+8:         
+9:     Scan Now
+10: 
+11: 
+12: 
+13: 
+14: ===============
+15: [A][B][C][D][E]
+Value: [Ljava.lang.String;@52719fb6
+{"balance":17.16,"cardCode":"844","cardNumber":"890382478","activated":true,"status":"New Card"}
+l: 10
+w: 15
+h: 15
+DEBUG: [890382478]
+
+
+Scan Now
+
+cnt1: 4
+pad1: 3
+...
+DEBUG: [Ljava.lang.String;@4a883b15 4
+line (before): [890382478] [len = 11]
+line (after):   [890382478] [pad = 2]
+line (before):  [len = 0]
+line (after):          [pad = 8]
+line (before):  [len = 0]
+line (after):          [pad = 8]
+line (before): Scan Now [len = 8]
+line (after):     Scan Now [pad = 4]
+cnt2: 7
+pad2: 3
+...
+
+
+0: ===============
+1:   MyCardsPay
+2: ===============
+3: 
+4: 
+5: 
+6:   [890382478]
+7:         
+8:         
+9:     Scan Now
+10: 
+11: 
+12: 
+13: 
+14: ===============
+15: [A][B][C][D][E]
+Value: [Ljava.lang.String;@25641d39
+l: 10
+w: 15
+h: 15
+DEBUG: $17.16
+
+cnt1: 1
+pad1: 4
+....
+DEBUG: [Ljava.lang.String;@7b36aa0c 1
+line (before): $17.16 [len = 6]
+line (after):      $17.16 [pad = 5]
+cnt2: 5
+pad2: 5
+.....
+
+
+0: ===============
+1:    MyCards
+2: ===============
+3: 
+4: 
+5: 
+6: 
+7:      $17.16
+8: 
+9: 
+10: 
+11: 
+12: 
+13: 
+14: ===============
+15: [A][B][C][D][E]
+Exception in thread "main" java.lang.NullPointerException
+	at starbucks.Main.main(Main.java:38)

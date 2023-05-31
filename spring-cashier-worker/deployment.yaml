@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-cashier-worker-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-cashier-worker
+  template:
+    metadata:
+      labels:
+        app: spring-cashier-worker
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: spring-cashier-worker
+          image: anhquangsjsu/spring-cashier-worker
+          env:
+            - name: RABBIT_HOST
+              value: "10.108.2.25"
+            - name: RABBIT_PORT
+              value: "5672"
+            - name: RABBIT_USERNAME
+              value: "guest"
+            - name: RABBIT_PASSWORD
+              value: "guest"
+            - name: MYSQL_HOST
+              value: "10.121.0.5"
+            - name: MYSQL_USERNAME
+              value: "quang"
+            - name: MYSQL_PASSWORD
+              value: "chu"

@@ -2,6 +2,7 @@ package com.example.springstarbucksapi.rest;
 
 import com.example.springstarbucksapi.model.StarbucksCard;
 import com.example.springstarbucksapi.model.StarbucksOrder;
+import com.example.springstarbucksapi.model.ActiveOrder;
 import com.example.springstarbucksapi.service.StarbucksService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,8 +57,8 @@ public class StarbucksOrderController {
 
     /* Get Details of a Starbucks Order */
     @GetMapping("/order/register/{regid}")
-    StarbucksOrder getActiveOrder(@PathVariable String regid, HttpServletResponse response) {
-        StarbucksOrder active = service.getActiveOrder(regid) ;
+    ActiveOrder getActiveOrder(@PathVariable String regid, HttpServletResponse response) {
+        ActiveOrder active = service.getActiveOrder(regid) ;
         if (active != null) {
             return active;
         } else {
@@ -68,7 +69,8 @@ public class StarbucksOrderController {
     /* Clear Active Order */
     @DeleteMapping("/order/register/{regid}")
     Message deleteActiveOrder(@PathVariable String regid) {
-        StarbucksOrder active = service.getActiveOrder(regid);
+        ActiveOrder active = service.getActiveOrder(regid);
+        System.out.println(active);
         if (active != null) {
             service.clearActiveOrder(regid);
             Message msg = new Message();
